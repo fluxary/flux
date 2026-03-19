@@ -4,22 +4,347 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLUX | İndir</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-deep:   #0a0f2e;
+            --blue-mid:    #1a2a6c;
+            --blue-bright: #2563eb;
+            --blue-glow:   #3b82f6;
+            --blue-ice:    #93c5fd;
+            --white:       #f0f6ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--blue-deep);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--white);
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 30%, rgba(37,99,235,0.35) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 70% at 80% 70%, rgba(59,130,246,0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 50% at 50% 0%,  rgba(99,179,255,0.12) 0%, transparent 60%),
+                var(--blue-deep);
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            animation: drift 18s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(37,99,235,0.25); top: -150px; left: -150px; animation-delay: 0s; }
+        .orb-2 { width: 380px; height: 380px; background: rgba(59,130,246,0.18); bottom: -100px; right: -80px; animation-delay: -6s; }
+        .orb-3 { width: 260px; height: 260px; background: rgba(147,197,253,0.12); top: 50%; left: 55%; animation-delay: -12s; }
+
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(40px, 30px) scale(1.08); }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-card {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin-bottom: 32px;
+            animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+        }
+
+        .logo-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, var(--blue-glow), var(--blue-ice), var(--blue-bright));
+            z-index: -1;
+            filter: blur(1px);
+            opacity: 0.9;
+        }
+
+        .logo-card::after {
+            content: '';
+            position: absolute;
+            inset: -18px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+            z-index: -2;
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1);   opacity: 0.6; }
+            50%       { transform: scale(1.15); opacity: 0.2; }
+        }
+
+        .site-logo {
+            width: 110px;
+            height: 110px;
+            border-radius: 24px;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-area {
+            margin-bottom: 44px;
+            animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+        }
+
+        .logo-area h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 4.4rem;
+            font-weight: 800;
+            letter-spacing: 0.28em;
+            background: linear-gradient(135deg, #ffffff 30%, var(--blue-ice) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: none;
+        }
+
+        .logo-area p {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            font-size: 1.05rem;
+            color: rgba(147, 197, 253, 0.8);
+            letter-spacing: 0.04em;
+        }
+
+        .divider {
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--blue-glow), transparent);
+            margin: 0 auto 14px;
+            border-radius: 2px;
+        }
+
+        .button-wrapper {
+            animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.35s both;
+        }
+
+        .cool-button {
+            position: relative;
+            padding: 18px 54px;
+            font-family: 'Syne', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: white;
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            outline: none;
+            z-index: 1;
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .cool-button:hover  { transform: translateY(-4px) scale(1.03); }
+        .cool-button:active { transform: translateY(1px)  scale(0.98); }
+
+        .cool-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #1d4ed8, #2563eb 50%, #3b82f6);
+            z-index: -2;
+            transition: opacity 0.3s;
+        }
+
+        .cool-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50px;
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%);
+            background-size: 200% 100%;
+            background-position: -100% 0;
+            z-index: -1;
+            transition: background-position 0.5s ease;
+        }
+
+        .cool-button:hover::after { background-position: 200% 0; }
+
+        .btn-glow {
+            position: absolute;
+            inset: -1px;
+            border-radius: 50px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(147,197,253,0.6), rgba(37,99,235,0.3), rgba(147,197,253,0.6));
+            z-index: -3;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cool-button:hover .btn-glow { opacity: 1; }
+
+        .btn-shadow {
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 20px;
+            background: rgba(37,99,235,0.45);
+            border-radius: 50%;
+            filter: blur(12px);
+            z-index: -4;
+            transition: all 0.3s;
+        }
+
+        .cool-button:hover .btn-shadow {
+            width: 85%;
+            height: 24px;
+            background: rgba(59,130,246,0.55);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 26px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            border: 1px solid rgba(59,130,246,0.25);
+            background: rgba(37,99,235,0.1);
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+            color: rgba(147,197,253,0.75);
+            animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.5s both;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #4ade80;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+
+        .deco-bolt {
+            position: fixed;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.07;
+        }
+        .deco-bolt-1 { top: 8%;  left: 6%;  width: 80px;  transform: rotate(-15deg); }
+        .deco-bolt-2 { bottom: 10%; right: 7%; width: 55px;  transform: rotate(20deg); animation: float 6s ease-in-out infinite alternate; }
+        .deco-bolt-3 { top: 55%; left: 2%;  width: 35px;  transform: rotate(5deg);  animation: float 8s ease-in-out infinite alternate-reverse; }
+
+        @keyframes float {
+            from { transform: translateY(0)  rotate(20deg); }
+            to   { transform: translateY(-14px) rotate(20deg); }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo-area">
-            <h1>FLUX</h1>
-            <p>Yapay Zeka Asistanını Hemen Deneyin</p>
-        </div>
-        
+<div class="bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="grid-overlay"></div>
+
+<svg class="deco-bolt deco-bolt-1" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
+</svg>
+<svg class="deco-bolt deco-bolt-2" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
+</svg>
+<svg class="deco-bolt deco-bolt-3" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
+</svg>
+
+<div class="container">
+
+    <div class="logo-card">
+        <img src="logo.png" alt="FLUX Logo" class="site-logo">
+    </div>
+
+    <div class="logo-area">
+        <h1>FLUX</h1>
+        <div class="divider"></div>
+        <p>Yapay Zeka Asistanını Hemen Deneyin</p>
+    </div>
+
+    <div class="button-wrapper">
         <button id="downloadBtn" class="cool-button">
+            <span class="btn-glow"></span>
+            <span class="btn-shadow"></span>
             <span>Şimdi İndir</span>
-            <div class="dot"></div>
         </button>
     </div>
 
-    <script src="script.js"></script>
+    <div class="badge">
+        <span class="badge-dot"></span>
+        Sadece Windows'ta
+    </div>
+
+</div>
+
+<script>
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    const fileUrl = 'FLUX_Setup.exe';
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = 'FLUX_Setup.exe';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+</script>
 </body>
 </html>
